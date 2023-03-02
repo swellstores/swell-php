@@ -72,7 +72,7 @@ class Resource extends \ArrayIterator
      *
      * @return Resource
      */
-    public static function instance($result, $client = null)
+    public static function instance($result, $client = null): mixed
     {
         if ((array)$result['$data'] === $result['$data']
             && isset($result['$data']['results'])
@@ -88,7 +88,7 @@ class Resource extends \ArrayIterator
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return (string)$this->url;
     }
@@ -98,7 +98,7 @@ class Resource extends \ArrayIterator
      *
      * @return mixed
      */
-    public function url()
+    public function url(): mixed
     {
         return $this->url;
     }
@@ -109,7 +109,7 @@ class Resource extends \ArrayIterator
      * @param  bool $raw
      * @return mixed
      */
-    public function data($raw = false)
+    public function data($raw = false): mixed
     {
         $data = $this->getArrayCopy();
 
@@ -134,7 +134,7 @@ class Resource extends \ArrayIterator
      *
      * @return Client
      */
-    public function client()
+    public function client(): mixed
     {
         return self::$client;
     }
@@ -144,7 +144,7 @@ class Resource extends \ArrayIterator
      *
      * @return array
      */
-    public function & links()
+    public function & links(): array
     {
         if (!isset(self::$client_links[$this->url])) {
             self::$client_links[$this->url] = array();
@@ -157,7 +157,7 @@ class Resource extends \ArrayIterator
      *
      * @return array
      */
-    public function & link_data()
+    public function & link_data(): array
     {
         return $this->link_data;
     }
@@ -167,7 +167,7 @@ class Resource extends \ArrayIterator
      *
      * @return array
      */
-    public function headers()
+    public function headers(): array
     {
         return $this->headers;
     }
@@ -179,7 +179,7 @@ class Resource extends \ArrayIterator
      * @param  mixed $data
      * @return mixed
      */
-    public function get($scope = null, $data = null)
+    public function get($scope = null, $data = null): mixed
     {
         return $this->request('get', $scope, $data);
     }
@@ -191,7 +191,7 @@ class Resource extends \ArrayIterator
      * @param  mixed $data
      * @return mixed
      */
-    public function put($scope = null, $data = null)
+    public function put($scope = null, $data = null): mixed
     {
         return $this->request('put', $scope, $data);
     }
@@ -203,7 +203,7 @@ class Resource extends \ArrayIterator
      * @param  mixed $data
      * @return mixed
      */
-    public function post($scope = null, $data = null)
+    public function post($scope = null, $data = null): mixed
     {
         return $this->request('post', $scope, $data);
     }
@@ -215,7 +215,7 @@ class Resource extends \ArrayIterator
      * @param  mixed $data
      * @return mixed
      */
-    public function delete($scope = null, $data = null)
+    public function delete($scope = null, $data = null): mixed
     {
         return $this->request('delete', $scope, $data);
     }
@@ -227,7 +227,7 @@ class Resource extends \ArrayIterator
      * @param  mixed $data
      * @return mixed
      */
-    public function request($method, $scope = null, $data = null)
+    public function request($method, $scope = null, $data = null): mixed
     {
         if (is_array($scope)) {
             $data = $scope;
@@ -251,7 +251,7 @@ class Resource extends \ArrayIterator
      *
      * @return mixed
      */
-    public function dump($return = false)
+    public function dump($return = false): mixed
     {
         return print_r($this->getArrayCopy(), $return);
     }
@@ -261,7 +261,7 @@ class Resource extends \ArrayIterator
      *
      * @param  array $links
      */
-    public function dump_links($links = null)
+    public function dump_links($links = null): array
     {
         if ($links === null) {
             $links = $this->links;

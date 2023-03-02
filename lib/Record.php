@@ -19,7 +19,7 @@ class Record extends Resource
      * @param  string $index
      * @return bool
      */
-    public function offsetExists($index)
+    public function offsetExists($index): bool
     {
         if (!parent::offsetExists($index) || parent::offsetGet($index) === null) {
             if (isset($this->links[$index]['url']) || $index === '$links') {
@@ -36,10 +36,10 @@ class Record extends Resource
      * @param  string $field
      * @return mixed
      */
-    public function offsetGet($field)
+    public function offsetGet($field): mixed
     {
         if ($field === null) {
-            return;
+            return false;
         }
         $link_result = null;
         if (isset($this->links[$field]['url']) || $field === '$links') {
@@ -59,7 +59,7 @@ class Record extends Resource
      * @param  mixed $value
      * @return void
      */
-    public function offsetSet($field, $value)
+    public function offsetSet($field, $value): void
     {
         if (isset($this->links[$field]['url'])) {
             $this->link_data[$field] = $value;
@@ -74,7 +74,7 @@ class Record extends Resource
      * @param  string $field
      * @return Resource
      **/
-    public function offset_get_link($field)
+    public function offset_get_link($field): mixed
     {
         $header_links = $this->links;
 
@@ -136,7 +136,7 @@ class Record extends Resource
      * @param  string $field
      * @return mixed
      **/
-    public function offset_get_result($field)
+    public function offset_get_result($field): mixed
     {
         $data_links = null;
         if (isset($this->links['*'])) {
@@ -177,7 +177,7 @@ class Record extends Resource
      *
      * @return mixed
      */
-    public function current()
+    public function current(): mixed
     {
         return $this->offset_get_result($this->key());
     }
@@ -188,7 +188,7 @@ class Record extends Resource
      * @param  string $field
      * @param  string $id
      */
-    public function link_url($field, $id = null)
+    public function link_url($field, $id = null): string
     {
         if ($qpos = strpos($this->url, '?')) {
             $url = substr($this->url, 0, $qpos);
@@ -209,7 +209,7 @@ class Record extends Resource
      * @param  bool $return
      * @param  bool $print
      */
-    public function dump($return = false, $print = true, $depth = 1)
+    public function dump($return = false, $print = true, $depth = 1): mixed
     {
         $dump = $this->data();
         $links = $this->links;

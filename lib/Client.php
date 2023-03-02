@@ -123,7 +123,7 @@ class Client
      * @param  mixed $merge
      * @param  array
      */
-    public function params($merge = null)
+    public function params($merge = null): mixed
     {
         if (is_array($merge)) {
             $this->params = array_merge($this->params, $merge);
@@ -142,7 +142,7 @@ class Client
      * @param  array $data
      * @return mixed
      */
-    public function request($method, $url, $data = null)
+    public function request($method, $url, $data = null): mixed
     {
         $url = (string)$url;
         $data = array('$data' => $data);
@@ -200,7 +200,7 @@ class Client
      * @param  Exception
      * @return void
      */
-    protected function request_rescue($e)
+    protected function request_rescue($e): void
     {
 
         if ($this->params['rescue']
@@ -226,7 +226,7 @@ class Client
      * @param  array $data
      * @return array
      */
-    protected function request_proxy_data($data)
+    protected function request_proxy_data($data): array
     {
         if (isset($this->params['rescued'])) {
             return $data;
@@ -260,7 +260,7 @@ class Client
      * @param  mixed $result
      * @return Resource
      */
-    protected function response($method, $url, $data, $result)
+    protected function response($method, $url, $data, $result): mixed
     {
         if (!isset($result['$url'])) {
             $result['$url'] = $url;
@@ -281,7 +281,7 @@ class Client
      * @param  array $result
      * @return mixed
      */
-    protected function response_data($result, $method, $url)
+    protected function response_data($result, $method, $url): mixed
     {
         if (isset($result['$data'])) {
             if (is_array($result['$data'])) {
@@ -299,7 +299,7 @@ class Client
      * @param  mixed $data
      * @return mixed
      */
-    public function get($url, $data = null)
+    public function get($url, $data = null): mixed
     {
         if ($this->cache) {
             $result = $this->cache->get($url, array('$data' => $data));
@@ -318,7 +318,7 @@ class Client
      * @param  mixed $data
      * @return mixed
      */
-    public function put($url, $data = '$undefined')
+    public function put($url, $data = '$undefined'): mixed
     {
         if ($data === '$undefined') {
             $data = ($url instanceof Resource)
@@ -335,7 +335,7 @@ class Client
      * @param  mixed $data
      * @return mixed
      */
-    public function post($url, $data = null)
+    public function post($url, $data = null): mixed
     {
         return $this->request('post', $url, $data);
     }
@@ -347,7 +347,7 @@ class Client
      * @param  mixed $data
      * @return mixed
      */
-    public function delete($url, $data = null)
+    public function delete($url, $data = null): mixed
     {
         return $this->request('delete', $url, $data);
     }
@@ -359,7 +359,7 @@ class Client
      * @param  array $params
      * @return mixed
      */
-    public function auth($nonce = null, $params = null)
+    public function auth($nonce = null, $params = null): mixed
     {
         $params = $params ?: array();
 

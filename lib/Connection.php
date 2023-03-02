@@ -62,7 +62,7 @@ class Connection
      *
      * @return void
      */
-    public function connect()
+    public function connect(): void
     {
         $this->host = $this->options['host'];
         $this->port = $this->options['port'];
@@ -106,7 +106,7 @@ class Connection
      * @param  array $args
      * @return mixed
      */
-    public function request($method)
+    public function request($method): mixed
     {
         $this->request_write(func_get_args());
         return $this->request_response();
@@ -144,7 +144,7 @@ class Connection
      *
      * @return mixed
      */
-    private function request_response()
+    private function request_response(): mixed
     {
         // Must not block while reading
         stream_set_blocking($this->stream, false);
@@ -188,7 +188,7 @@ class Connection
      *
      * @return string
      */
-    private function request_description()
+    private function request_description(): string
     {
         $request = json_decode(trim($this->last_request), true);
         $desc = strtoupper($request[0]);
@@ -203,7 +203,7 @@ class Connection
      *
      * @return void
      */
-    public function close()
+    public function close(): void
     {
         fclose($this->stream);
         $this->stream = null;

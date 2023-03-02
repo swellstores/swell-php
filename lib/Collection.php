@@ -51,7 +51,7 @@ class Collection extends Resource
      * @param  array $result
      * @return array
      */
-    protected function build_records($result)
+    protected function build_records($result): array
     {
         $url = $result['$url'];
         $parent_url = $url;
@@ -81,7 +81,7 @@ class Collection extends Resource
      * @param  string $index
      * @return bool
      */
-    public function offsetExists($index)
+    public function offsetExists($index): bool
     {
         if (!$exists = parent::offsetExists($index)) {
             if (isset($this->{$index})) {
@@ -97,7 +97,7 @@ class Collection extends Resource
      * @param  string $index
      * @return mixed
      */
-    function offsetGet($index)
+    function offsetGet($index): mixed
     {
         if (isset($this->{$index})) {
             return $this->{$index};
@@ -125,7 +125,7 @@ class Collection extends Resource
      *
      * @return mixed
      */
-    function records()
+    function records(): mixed
     {
         return $this->getArrayCopy();
     }
@@ -136,7 +136,7 @@ class Collection extends Resource
      * @param  bool $raw
      * @return mixed
      */
-    public function data($raw = false)
+    public function data($raw = false): mixed
     {
         $data = array(
             'count' => $this->count,
@@ -155,7 +155,7 @@ class Collection extends Resource
      * @param  bool $print
      * @return void
      */
-    function dump($return = false, $print = true, $depth = 1)
+    function dump($return = false, $print = true, $depth = 1): mixed
     {
         $dump = array();
         $dump['count'] = $this->count;

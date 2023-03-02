@@ -61,7 +61,7 @@ class Cache
      * @param  mixed $data
      * @return mixed
      */
-    public function get($url, $data = null)
+    public function get($url, $data = null): mixed
     {
         $cache_key = $this->get_key($url, $data);
 
@@ -94,7 +94,7 @@ class Cache
      * @param  mixed $data
      * @return string
      */
-    public function get_key($url, $data = null)
+    public function get_key($url, $data = null): string
     {
         return md5(serialize(array(trim($url, '/'), $data)));
     }
@@ -104,7 +104,7 @@ class Cache
      *
      * @return string
      */
-    public function get_path()
+    public function get_path(): string
     {
         $cache_path = rtrim($this->params['path'], '/')
             .'/client'.'.'.$this->params['client_id'];
@@ -121,7 +121,7 @@ class Cache
      *
      * @return array
      */
-    public function get_versions()
+    public function get_versions(): array
     {
         if (!$this->versions) {
             $this->versions = array();
@@ -138,7 +138,7 @@ class Cache
      *
      * @return array
      */
-    public function get_index()
+    public function get_index(): array
     {
         if (!$this->indexes) {
             $this->indexes = array();
@@ -158,7 +158,7 @@ class Cache
      * @param  mixed $result
      * @return void
      */
-    public function put($url, $data, $result)
+    public function put($url, $data, $result): void
     {
         if (!array_key_exists('$data', $result)) {
             $result['$data'] = null; // Allows for null response
@@ -196,7 +196,7 @@ class Cache
      * @param  string $size
      * @return int
      */
-    public function put_index($collection, $key, $size)
+    public function put_index($collection, $key, $size): int
     {
         $this->get_index();
 
@@ -221,7 +221,7 @@ class Cache
      * @param  mixed $data
      * @return void
      */
-    public function remove($url, $data = null)
+    public function remove($url, $data = null): void
     {
         $cache_key = $this->get_key($url, $data);
         $cache_path = $this->get_path($cache_key, 'result');
@@ -235,7 +235,7 @@ class Cache
      * @param  string $collection
      * @return bool
      */
-    public function truncate_index($collection)
+    public function truncate_index($collection): bool
     {
         $this->get_index();
         asort($this->indexes[$collection]);
@@ -253,7 +253,7 @@ class Cache
      * @param  string $cache_key
      * @return int
      */
-    public function put_version($collection, $version)
+    public function put_version($collection, $version): int
     {
         if ($version) {
             $this->get_versions();
@@ -271,7 +271,7 @@ class Cache
      * @param  mixed $result
      * @return void
      */
-    public function clear($result)
+    public function clear($result): void
     {
         $invalid = array();
         $this->get_versions();
@@ -304,7 +304,7 @@ class Cache
      * @param  array $invalid
      * @return void
      */
-    public function clear_indexes($invalid)
+    public function clear_indexes($invalid): void
     {
         if (empty($invalid)) {
             return;
@@ -337,7 +337,7 @@ class Cache
      *
      * @return string
      */
-    public function get_cache()
+    public function get_cache(): string
     {
         $args = func_get_args();
         $cache_path = call_user_func_array(array($this, 'get_path'), $args);
@@ -355,7 +355,7 @@ class Cache
      * @param  mixed $content
      * @return int
      */
-    public function write_cache($cache_path, $content)
+    public function write_cache($cache_path, $content): int
     {
         $cache_content = json_encode($content);
         $cache_size = strlen($cache_content);
@@ -387,7 +387,7 @@ class Cache
      * @param  string $cache_path
      * @return void
      */
-    public function clear_cache($cache_path)
+    public function clear_cache($cache_path): void
     {
         @unlink($cache_path);
     }
@@ -398,7 +398,7 @@ class Cache
      * @param  array $result
      * @return array
      */
-    public function result_collections($result)
+    public function result_collections($result): array
     {
         // Combine $collection and $expanded headers
         $collections = isset($result['$collection'])
