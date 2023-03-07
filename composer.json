@@ -1,23 +1,31 @@
 {
-	"name": "swellstores/swell-php",
-	"version": "1.2.1",
-	"type": "library",
-	"description": "Swell API library for PHP",
-	"keywords": [
-		"swell", "ecommerce", "payments",
-		"rest", "api", "client"
-	],
-	"homepage": "https://swellstores.com",
-	"license": "MIT",
-	"authors": [{
-		"name": "Swell and contributors",
-		"homepage": "https://github.com/swellstores/swell-php/contributors"
-	}],
-	"require": {
-		"php": ">=5.3.0",
-		"ext-json": "*"
-	},
-	"autoload": {
-		"classmap": ["lib/"]
-	}
+  "name": "swellstores/swell-php",
+  "version": "1.2.1",
+  "type": "library",
+  "description": "Swell API library for PHP",
+  "keywords": [
+    "swell",
+    "ecommerce",
+    "payments",
+    "rest",
+    "api",
+    "client"
+  ],
+  "homepage": "https://swellstores.com",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Swell and contributors",
+      "homepage": "https://github.com/swellstores/swell-php/contributors"
+    }
+  ],
+  "require": {
+    "php": ">=7.4.0",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "classmap": [
+      "lib/"
+    ]
+  }
 }
