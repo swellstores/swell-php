@@ -34,6 +34,11 @@ class Cache
     public $indexes = array();
 
     /**
+     * @var string
+     */
+    public $env = null;
+
+    /**
      * @param  string $client_id
      * @param  string $client_key
      * @param  array $options
@@ -88,6 +93,17 @@ class Cache
     }
 
     /**
+     * Set environment id
+     *
+     * @param  string $env
+     * @return void
+     */
+    public function set_env($env)
+    {
+        $this->env = $env;
+    }
+
+    /**
      * Get a cache key
      *
      * @param  string $url
@@ -108,6 +124,10 @@ class Cache
     {
         $cache_path = rtrim($this->params['path'], '/')
             .'/client'.'.'.$this->params['client_id'];
+
+        if ($this->env) {
+            $cache_path .= '_'.$this->env;
+        }
 
         foreach (func_get_args() as $arg) {
             $cache_path .= '.'.$arg;
