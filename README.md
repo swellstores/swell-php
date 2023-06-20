@@ -60,9 +60,9 @@ $swell = new Swell\Client('my-store', 'secret-key', [
 
 ## Documentation
 
-API reference: https://swell.store/docs/api
+API reference: https://developers.swell.is/backend-api/
 
-Universal JavaScript client for Swell's Frontend API (Swell.js): https://swell.store/docs/js
+Universal JavaScript client for Swell's Frontend API (Swell.js): https://github.com/swellstores/swell-js
 
 ## Contributing
 
