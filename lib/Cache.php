@@ -376,7 +376,7 @@ class Cache
     if (is_file($cache_path)) {
       return file_get_contents($cache_path);
     }
-    return null;
+    return '';
   }
 
   /**
