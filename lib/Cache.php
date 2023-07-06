@@ -261,9 +261,9 @@ class Cache
    * Prefers to eject the smallest cache content first
    *
    * @param  string $collection
-   * @return bool
+   * @return void
    */
-  public function truncate_index($collection): bool
+  public function truncate_index($collection)
   {
     $this->get_index();
     asort($this->indexes[$collection]);
@@ -271,7 +271,7 @@ class Cache
     $key = key($this->indexes[$collection]);
 
     $invalid = ["{$collection}" => $key];
-    return $this->clear_indexes($invalid);
+    $this->clear_indexes($invalid);
   }
 
   /**
