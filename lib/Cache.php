@@ -194,7 +194,13 @@ class Cache
     $cache_content = $result;
     $cache_content['$cached'] = true;
 
+    // Remove $client from data returned by routed client
+    if (isset($data['$client'])) {
+      unset($data['$client']);
+    }
+
     $cache_key = $this->get_key($url, $data);
+
     $cache_path = $this->get_path($cache_key, "result");
     if ($size = $this->write_cache($cache_path, $cache_content)) {
       if (isset($result['$cached'])) {

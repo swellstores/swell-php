@@ -29,6 +29,11 @@ class Client
   protected $authed;
 
   /**
+   * @var string
+   */
+  protected $end_client_id;
+
+  /**
    * @var Cache
    */
   public $cache;
@@ -131,6 +136,10 @@ class Client
       "port" => $this->params["port"],
       "verify_cert" => $this->params["verify_cert"],
     ]);
+
+    $this->end_client_id = isset($this->params["route"]["client"])
+        ? $this->params["route"]["client"]
+        : $this->params["client_id"];
   }
 
   /**
@@ -165,10 +174,7 @@ class Client
     $data = ['$data' => $data];
 
     if (!$this->cache && $this->params["cache"]) {
-      $client_id = isset($this->params["route"]["client"])
-        ? $this->params["route"]["client"]
-        : $this->params["client_id"];
-      $this->cache = new Cache($client_id, $this->params["cache"]);
+      $this->cache = new Cache($this->end_client_id, $this->params["cache"]);
     }
 
     try {
@@ -177,9 +183,7 @@ class Client
           $data = $this->request_proxy_data($data);
         }
         if (!$this->authed) {
-          $data['$client'] = isset($this->params["route"]["client"])
-            ? $this->params["route"]["client"]
-            : $this->params["client_id"];
+          $data['$client'] = $this->end_client_id;
           // Perform basic auth by default for secure/non-route based requests
           if (
             !isset($this->server->options["clear"]) &&
@@ -254,9 +258,7 @@ class Client
     }
 
     $data['$proxy'] = [
-      "client" => isset($this->params["route"]["client"])
-        ? $this->params["route"]["client"]
-        : $this->params["client_id"],
+      "client" => $this->end_client_id,
       "host" => $this->params["host"],
       "port" => $this->params["port"],
     ];
@@ -328,6 +330,10 @@ class Client
   #[\ReturnTypeWillChange]
   public function get($url, $data = null)
   {
+    if (!$this->cache && $this->params["cache"]) {
+      $this->cache = new Cache($this->end_client_id, $this->params["cache"]);
+    }
+
     if ($this->cache) {
       $result = $this->cache->get($url, ['$data' => $data]);
       if (array_key_exists('$data', (array) $result)) {
