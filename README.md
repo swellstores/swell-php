@@ -18,7 +18,8 @@ print_r($products);
 
 or with [Composer](https://getcomposer.org/doc/05-repositories.md#vcs)
 
-__composer.json__
+**composer.json**
+
 ```json
 "require": {
   "swellstores/swell-php": "dev-master"
@@ -63,6 +64,16 @@ $swell = new Swell\Client('my-store', 'secret-key', [
 API reference: https://developers.swell.is/backend-api/
 
 Universal JavaScript client for Swell's Frontend API (Swell.js): https://github.com/swellstores/swell-js
+
+## CA certificates
+
+TLS certificate verification uses the bundled Mozilla CA certificate store at
+`data/ca-certificates.crt` via `lib/Connection.php`. Keep this file current
+before publishing releases that may be used with `verify_cert` enabled.
+
+To update it, download the current PEM bundle from
+https://curl.se/docs/caextract.html and replace `data/ca-certificates.crt`,
+preserving the filename because it is referenced directly by the client.
 
 ## Contributing
 
