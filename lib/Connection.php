@@ -86,10 +86,12 @@ class Connection
       $options = [
         "ssl" => [
           "verify_peer" => false,
+          "verify_peer_name" => false
         ],
       ];
       if ($this->options["verify_cert"]) {
         $options["ssl"]["verify_peer"] = true;
+        $options["ssl"]["verify_peer_name"] = true;
         $options["ssl"]["verify_depth"] = 5;
         $options["ssl"]["cafile"] =
           \dirname(\dirname(__FILE__)) . "/data/ca-certificates.crt";
